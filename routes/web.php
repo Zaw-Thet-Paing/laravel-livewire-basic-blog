@@ -1,8 +1,9 @@
 <?php
 
+use App\Livewire\Admin\Home as AdminHome;
+use App\Livewire\User\Home as UserHome;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
-use App\Livewire\User\Home;
 use Illuminate\Support\Facades\Route;
 
 
@@ -13,5 +14,9 @@ Route::middleware('guest')->group(function(){
 });
 
 Route::middleware('auth')->group(function(){
-    Route::get('/home', Home::class)->name('user.home');
+    Route::get('/home', UserHome::class)->name('user.home');
+});
+
+Route::middleware(['auth', 'admin'])->group(function(){
+    Route::get('/admin/home', AdminHome::class)->name('admin.home');
 });
